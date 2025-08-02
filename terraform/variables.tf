@@ -12,5 +12,5 @@ variable "region" {
 variable "zone" {
   type        = string
   description = "GCP zone for the cluster"
-  default     = "us-central1-b"
+  default     = "us-central1-a"
 }
