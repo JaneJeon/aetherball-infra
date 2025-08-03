@@ -30,6 +30,9 @@ resource "google_container_cluster" "primary" {
       enable_relay   = true
     }
   }
+
+  # Why does the monitoring affect this?
+  enable_l4_ilb_subsetting = true
 }
 
 resource "google_container_node_pool" "primary_nodes" {
