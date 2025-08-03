@@ -31,6 +31,10 @@ resource "google_container_cluster" "primary" {
     }
   }
 
+  cost_management_config {
+    enabled = true
+  }
+
   # Why does the monitoring affect this?
   enable_l4_ilb_subsetting = true
 }
