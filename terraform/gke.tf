@@ -17,6 +17,19 @@ resource "google_container_cluster" "primary" {
     stack_type = "IPV4_IPV6"
   }
   datapath_provider = "ADVANCED_DATAPATH"
+
+  monitoring_config {
+    # Enable managed Prometheus for metrics collection
+    managed_prometheus {
+      enabled = true
+    }
+
+    # Enable advanced datapath observability
+    advanced_datapath_observability_config {
+      enable_metrics = true
+      enable_relay   = true
+    }
+  }
 }
 
 resource "google_container_node_pool" "primary_nodes" {
