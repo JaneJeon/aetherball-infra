@@ -16,6 +16,7 @@ resource "google_container_cluster" "primary" {
   ip_allocation_policy {
     stack_type = "IPV4_IPV6"
   }
+  datapath_provider = "ADVANCED_DATAPATH"
 }
 
 resource "google_container_node_pool" "primary_nodes" {
