@@ -31,6 +31,7 @@ resource "google_container_node_pool" "primary_nodes" {
   }
 
   node_config {
+    # https://cloud.google.com/compute/all-pricing?hl=en#section-18
     machine_type = "e2-small"
 
     # TODO: provision a service account with the minimum required permissions
