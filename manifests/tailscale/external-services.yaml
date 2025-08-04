@@ -6,6 +6,8 @@ metadata:
     tailscale.com/proxy-class: "accept-routes"
   annotations:
     tailscale.com/tailnet-ip: "fd12:22ef:e152:0:2000:95:f868:c30e"
+    argocd.argoproj.io/sync-options: IgnoreExtraneous=true
+    argocd.argoproj.io/compare-options: IgnoreExtraneous=true
 spec:
   type: ExternalName
   externalName: "placeholder"
