@@ -28,3 +28,47 @@ resource "helm_release" "tailscale_operator" {
     value = var.tailscale_client_secret
   }
 }
+
+resource "kubernetes_manifest" "tailscale_subnet_router" {
+  depends_on = [helm_release.tailscale_operator]
+
+  manifest = {
+    apiVersion = "tailscale.com/v1alpha1"
+    kind       = "Connector"
+    metadata = {
+      name = "ts-pod-cidrs"
+    }
+    spec = {
+      hostname = "ts-pod-cidrs"
+      subnetRouter = {
+        advertiseRoutes = [
+          google_compute_subnetwork.subnet.ip_cidr_range,
+          google_container_cluster.primary.services_ipv4_cidr
+        ]
+      }
+    }
+  }
+}
+
+resource "kubernetes_manifest" "tailscale_proxy_class" {
+  manifest = {
+    apiVersion = "tailscale.com/v1alpha1"
+    kind       = "ProxyClass"
+    metadata = {
+      name = "accept-routes"
+    }
+    spec = {
+      tailscale = {
+        acceptRoutes = true
+      }
+
+      metrics = {
+        enable = true
+
+        serviceMonitor = {
+          enable = true
+        }
+      }
+    }
+  }
+}
