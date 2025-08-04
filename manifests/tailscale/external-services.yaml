@@ -9,6 +9,9 @@ metadata:
 spec:
   type: ExternalName
   externalName: "placeholder"
+  ipFamilyPolicy: SingleStack
+  ipFamilies:
+    - IPv6
   ports:
     - port: 3000
       targetPort: 3000
