@@ -45,6 +45,10 @@ jobs:
           for chart in charts/*/; do
             if [ -d "$chart" ]; then
               chart_name=$(basename "$chart")
+
+              echo "Building dependencies for chart: $chart_name"
+              helm dependency build "$chart"
+              
               echo "Deploying chart: $chart_name"
               helm upgrade --install "$chart_name" "$chart"
             fi
