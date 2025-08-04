@@ -1,3 +1,6 @@
+# First installation for ArgoCD chart;
+# This is a 'bootstrap' step to ensure ArgoCD is installed in the cluster,
+# but afterwards, ArgoCD will manage its own applications separately from Terraform.
 resource "helm_release" "argocd" {
   name             = "argocd"
   repository       = "https://argoproj.github.io/argo-helm"
@@ -20,34 +23,5 @@ EOF
   ]
 }
 
-resource "kubernetes_manifest" "app_project" {
-  manifest = {
-    apiVersion = "argoproj.io/v1alpha1"
-    kind       = "Application"
-    metadata = {
-      name      = "app"
-      namespace = "argocd"
-    }
-    spec = {
-      project = "default"
-      source = {
-        repoURL        = "https://github.com/${var.github_repo}"
-        targetRevision = "HEAD"
-        path           = "charts/app"
-      }
-      destination = {
-        server    = "https://kubernetes.default.svc"
-        namespace = "default"
-      }
-      syncPolicy = {
-        automated = {
-          prune    = true
-          selfHeal = true
-        }
-        syncOptions = ["CreateNamespace=true"]
-      }
-    }
-  }
-
-  depends_on = [helm_release.argocd]
-}
+# ArgoCD Application will be created manually after first deployment
+# See manifests/argocd-app.yaml for the Application definition
