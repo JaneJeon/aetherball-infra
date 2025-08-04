@@ -51,6 +51,8 @@ resource "kubernetes_manifest" "tailscale_subnet_router" {
 }
 
 resource "kubernetes_manifest" "tailscale_proxy_class" {
+  depends_on = [helm_release.tailscale_operator]
+
   manifest = {
     apiVersion = "tailscale.com/v1alpha1"
     kind       = "ProxyClass"
@@ -64,10 +66,6 @@ resource "kubernetes_manifest" "tailscale_proxy_class" {
 
       metrics = {
         enable = true
-
-        serviceMonitor = {
-          enable = true
-        }
       }
     }
   }
