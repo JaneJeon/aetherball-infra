@@ -1,3 +1,4 @@
+# The operator is installed via terraform - for now - because passing secrets via ArgoCD requires some setup...
 resource "helm_release" "tailscale_operator" {
   depends_on = [google_container_node_pool.primary_nodes]
 
