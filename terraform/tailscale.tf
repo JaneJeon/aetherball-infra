@@ -40,6 +40,7 @@ resource "kubernetes_manifest" "tailscale_subnet_router" {
     }
     spec = {
       hostname = "ts-pod-cidrs"
+      exitNode = true
       subnetRouter = {
         advertiseRoutes = [
           google_compute_subnetwork.subnet.ip_cidr_range,
