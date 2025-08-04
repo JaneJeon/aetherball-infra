@@ -14,6 +14,7 @@ resource "helm_release" "argocd" {
   values = [
     <<EOF
 server:
+  replicas: 1
   service:
     type: LoadBalancer
   resources:
@@ -24,6 +25,7 @@ server:
       memory: "256Mi"
       cpu: "200m"
 repoServer:
+  replicas: 1
   resources:
     requests:
       memory: "64Mi"
@@ -31,6 +33,8 @@ repoServer:
     limits:
       memory: "128Mi"
       cpu: "100m"
+applicationSet:
+  replicas: 1
 controller:
   resources:
     requests:

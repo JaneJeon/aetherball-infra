@@ -40,10 +40,10 @@ resource "google_container_cluster" "primary" {
 }
 
 resource "google_container_node_pool" "primary_nodes" {
-  name       = "${var.project_id}-gke-nodes"
-  location   = var.zone
-  cluster    = google_container_cluster.primary.name
-  node_count = 2
+  name     = "${var.project_id}-gke-nodes"
+  location = var.zone
+  cluster  = google_container_cluster.primary.name
+  # Don't set node_count when using autoscaling - let autoscaler manage it
 
   autoscaling {
     min_node_count = 1
