@@ -49,24 +49,3 @@ resource "kubernetes_manifest" "tailscale_subnet_router" {
     }
   }
 }
-
-resource "kubernetes_manifest" "tailscale_proxy_class" {
-  depends_on = [helm_release.tailscale_operator]
-
-  manifest = {
-    apiVersion = "tailscale.com/v1alpha1"
-    kind       = "ProxyClass"
-    metadata = {
-      name = "accept-routes"
-    }
-    spec = {
-      tailscale = {
-        acceptRoutes = true
-      }
-
-      metrics = {
-        enable = true
-      }
-    }
-  }
-}
