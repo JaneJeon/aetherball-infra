@@ -28,6 +28,7 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
+          project_id: ${{ env.GCP_PROJECT_ID }}
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Get GKE credentials
@@ -35,7 +36,6 @@ jobs:
         with:
           cluster_name: ${{ env.GKE_CLUSTER_NAME }}
           location: ${{ env.GKE_ZONE }}
-          project_id: ${{ env.GCP_PROJECT_ID }}
 
       - name: Set up Helm
         uses: azure/setup-helm@v4
