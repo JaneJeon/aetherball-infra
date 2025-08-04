@@ -4,7 +4,7 @@ metadata:
   name: grafana
   annotations:
     tailscale.com/proxy-class: "accept-routes"
-    tailscale.com/tailnet-fqdn: "grafana.railway.internal"
+    tailscale.com/tailnet-ip: "fd12:22ef:e152:0:2000:95:f868:c30e"
 spec:
   type: ExternalName
   externalName: "placeholder"
