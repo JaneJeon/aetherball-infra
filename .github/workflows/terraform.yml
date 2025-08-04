@@ -16,7 +16,8 @@ jobs:
       # Yes, you're supposed to mount only the environment variables you need, at each step.
       GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       TF_VAR_project_id: ${{ vars.TF_VAR_PROJECT_ID }}
-      TF_VAR_github_repo: ${{ github.repository }}
+      TF_VAR_tailscale_client_id: ${{ secrets.TAILSCALE_CLIENT_ID }}
+      TF_VAR_tailscale_client_secret: ${{ secrets.TAILSCALE_CLIENT_SECRET }}
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:

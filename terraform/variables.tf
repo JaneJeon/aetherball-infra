@@ -15,7 +15,14 @@ variable "zone" {
   default     = "us-central1-a"
 }
 
-variable "github_repo" {
+variable "tailscale_client_id" {
   type        = string
-  description = "GitHub repository in format owner/repo"
+  description = "Tailscale OAuth client ID"
+  sensitive   = true
+}
+
+variable "tailscale_client_secret" {
+  type        = string
+  description = "Tailscale OAuth client secret"
+  sensitive   = true
 }
