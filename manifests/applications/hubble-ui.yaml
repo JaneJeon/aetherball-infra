@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tailscale-config
-  namespace: hubble-ui
+  name: hubble-ui
+  namespace: hubble
 spec:
   project: default
   source:
     repoURL: https://github.com/JaneJeon/aetherball-infra
     targetRevision: HEAD
-    path: manifests/hubble-ui
+    path: manifests/hubble
   destination:
     server: https://kubernetes.default.svc
     namespace: default
