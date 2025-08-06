@@ -7,7 +7,7 @@ resource "helm_release" "argocd" {
   chart            = "argo-cd"
   namespace        = "argocd"
   create_namespace = true
-  version          = "7.6.12"
+  version          = "7.9.1"
 
   depends_on = [google_container_node_pool.primary_nodes]
 
