@@ -16,7 +16,7 @@ resource "helm_release" "argocd" {
 server:
   replicas: 1
   service:
-    type: LoadBalancer
+    type: ClusterIP
   resources:
     requests:
       memory: "128Mi"
