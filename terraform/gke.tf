@@ -26,7 +26,7 @@ resource "google_container_cluster" "primary" {
 
     # Enable advanced datapath observability
     advanced_datapath_observability_config {
-      enable_metrics = true
+      enable_metrics = false
       enable_relay   = true
     }
   }
