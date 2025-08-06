@@ -54,6 +54,9 @@ resource "google_container_node_pool" "primary_nodes" {
     # https://cloud.google.com/compute/all-pricing?hl=en#section-18
     machine_type = "e2-small"
 
+    disk_size_gb = 20 # Minimal boot disk
+    disk_type    = "pd-balanced"
+
     # TODO: provision a service account with the minimum required permissions
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
