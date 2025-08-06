@@ -22,6 +22,5 @@ spec:
   ignoreDifferences:
     - group: ""
       kind: Service
-      name: grafana-tailscale
       jsonPointers:
         - /spec/externalName
