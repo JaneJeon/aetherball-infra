@@ -1,0 +1,39 @@
+# This triggers Tailscale Operator to create the 'ephemeral' pod + service
+# that we're supposed to be able to connect to, but can't due to IPv6 Endpoint issues.
+# So we won't be using this service.
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-tailscale
+  annotations:
+    tailscale.com/proxy-class: "accept-routes"
+    tailscale.com/tailnet-ip: "fd12:22ef:e152:0:2000:95:f868:c30e"
+spec:
+  type: ExternalName
+  externalName: "placeholder"
+  ports:
+    - port: 3000
+      targetPort: 3000
+---
+# Instead, with the service unusable (because it doesn't have an IPv6 endpoint),
+# we manually hack together a service that points to the IPv6 endpoint of the ephemeral pod,
+# using the stable selector labels that Tailscale Operator sets.
+# This allows us to access Grafana via IPv6.
+# Note that this part is not managed by/related to the Tailscale Operator in any way.
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-ipv6
+  namespace: tailscale
+spec:
+  clusterIP: None
+  selector:
+    tailscale.com/managed: "true"
+    tailscale.com/parent-resource: grafana-tailscale
+    tailscale.com/parent-resource-type: svc
+  ports:
+    - port: 3000
+      targetPort: 3000
+  ipFamilyPolicy: SingleStack
+  ipFamilies:
+    - IPv6
