@@ -11,6 +11,9 @@ jobs:
     name: Terraform
     runs-on: ubuntu-latest
     environment: production
+    concurrency:
+      group: terraform-state
+      cancel-in-progress: false
     env:
       # Yes, this is bad for security.
       # Yes, you're supposed to mount only the environment variables you need, at each step.
